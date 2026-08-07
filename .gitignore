@@ -1,0 +1,24 @@
+# Exclude heavy raw datasets & binary arrays from GitHub
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+*.fits
+*.fit
+*.fts
+*.ser
+*.tiff
+*.tif
+*.png
+*.jpg
+
+# System & Python Artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+Desktop.ini
+Thumbs.db
+.vscode/
