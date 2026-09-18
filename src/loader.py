@@ -55,9 +55,11 @@ class FITSLoader:
         return self.file_manifest
 
 if __name__ == "__main__":
-    raw_dir = "data/raw"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    raw_dir = os.path.join(project_root, "data", "raw")
     has_raw_files = os.path.exists(raw_dir) and any(f.endswith('.fits') for f in os.listdir(raw_dir))
-    target_dir = raw_dir if has_raw_files else "data/processed"
+    target_dir = raw_dir if has_raw_files else os.path.join(project_root, "data", "processed")
     
     print(f"[+] Testing FITSLoader against directory: {target_dir}")
     loader = FITSLoader(target_dir)

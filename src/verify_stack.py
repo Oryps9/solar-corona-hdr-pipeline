@@ -33,15 +33,15 @@ def verify_pipeline():
     print(f"[+] Successfully generated FITS array: {test_filepath}")
 
     # 3. Parse header & render log-scale intensity plot
-    with fits.open(test_filepath) as loaded_fits:
-        data = loaded_fits[0].data
-        header = loaded_fits[0].header
-        
+    with fits.open(test_filepath) as hdul:  # type: ignore
+        data = np.asarray(hdul[0].data)  # type: ignore
+        header = hdul[0].header  # type: ignore
+
         plt.figure(figsize=(7, 6))
         plt.imshow(data, cmap='inferno', norm=LogNorm())
         plt.colorbar(label='Digital Counts (DN)')
         plt.title(f"Stack Verification | Exp: {header['EXPTIME']}s | {header['CAMERA']}")
-        
+
         plot_path = 'data/processed/stack_verification_plot.png'
         plt.savefig(plot_path, dpi=150, bbox_inches='tight')
         plt.close()
